@@ -7,12 +7,17 @@
     "sourceMap": true,
     "rootDir": "src",
     "outDir": "dist",
+    "baseUrl": ".",
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules", "dist", "jest.config.js"]
 }
