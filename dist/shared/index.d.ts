@@ -1,6 +1,0 @@
-export * from './application';
-export * from './domain';
-export * from './infrastructure';
-export * from './shared.module';
-export * from './tokens';
-//# sourceMappingURL=index.d.ts.map

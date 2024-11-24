@@ -2,16 +2,16 @@
   "name": "@marcostmunhoz/fastfood-libs",
   "type": "module",
   "version": "0.0.3",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "dist"
+    "lib/**/*"
   ],
   "repository": "git@github.com:marcostmunhoz/fiap-tech-challenge-fastfood-libs.git",
   "author": "Marcos T Munhoz <3648104+marcostmunhoz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc --project tsconfig.build.json",
+    "build": "rimraf lib && tsc --project tsconfig.build.json",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "jest",

@@ -3,4 +3,3 @@ yarn.lock
 tsconfig.tsbuildinfo
 coverage
 src
-*.spec.ts
