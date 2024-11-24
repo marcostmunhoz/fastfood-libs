@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "main": "dist/index",
   "types": "dist/index",
+  "files": [
+    "dist"
+  ],
   "repository": "git@github.com:marcostmunhoz/fiap-tech-challenge-fastfood-libs.git",
   "author": "Marcos T Munhoz <3648104+marcostmunhoz@users.noreply.github.com>",
   "license": "MIT",

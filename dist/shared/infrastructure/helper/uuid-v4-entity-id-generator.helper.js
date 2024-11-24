@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UuidV4EntityIdGeneratorHelper = void 0;
-const entity_id_value_object_1 = require("@/shared/domain/value-object/entity-id.value-object");
+const entity_id_value_object_1 = require("src/shared/domain/value-object/entity-id.value-object");
 const uuid_1 = require("uuid");
 class UuidV4EntityIdGeneratorHelper {
     generate() {
