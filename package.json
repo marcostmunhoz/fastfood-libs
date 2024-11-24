@@ -1,7 +1,7 @@
 {
   "name": "@marcostmunhoz/fastfood-libs",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index",
   "types": "dist/index",
   "files": [
@@ -11,7 +11,7 @@
   "author": "Marcos T Munhoz <3648104+marcostmunhoz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc --build",
+    "build": "rimraf dist && tsc --project tsconfig.build.json",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "jest",

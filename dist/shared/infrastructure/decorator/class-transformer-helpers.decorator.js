@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransformStringToEntityId = exports.TransformValueObjectToPrimitive = exports.TransformPrimitiveToValueObject = exports.TransformObjectKeyOptional = exports.TransformOptional = void 0;
+const entity_id_value_object_1 = require("@/shared/domain/value-object/entity-id.value-object");
 const class_transformer_1 = require("class-transformer");
-const entity_id_value_object_1 = require("src/shared/domain/value-object/entity-id.value-object");
 const TransformOptional = (callback) => (0, class_transformer_1.Transform)(({ value }) => {
     if (value === null || value === undefined || value === '') {
         return null;
