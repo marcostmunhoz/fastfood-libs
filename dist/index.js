@@ -14,9 +14,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./application"), exports);
-__exportStar(require("./domain"), exports);
-__exportStar(require("./infrastructure"), exports);
-__exportStar(require("./shared.module"), exports);
-__exportStar(require("./tokens"), exports);
+__exportStar(require("./shared"), exports);
 //# sourceMappingURL=index.js.map
