@@ -1,9 +1,12 @@
 {
   "name": "@marcostmunhoz/fastfood-libs",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "repository": "git@github.com:marcostmunhoz/fiap-tech-challenge-fastfood-libs.git",
   "author": "Marcos T Munhoz <3648104+marcostmunhoz@users.noreply.github.com>",
   "license": "MIT",
