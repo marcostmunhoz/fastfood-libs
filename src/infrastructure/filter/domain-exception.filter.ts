@@ -1,7 +1,7 @@
-import { DomainException } from '@/shared/domain/exception/domain.exception';
-import { EntityAlreadyExistsException } from '@/shared/domain/exception/entity-already-exists.exception';
-import { EntityNotFoundException } from '@/shared/domain/exception/entity-not-found.exception';
-import { UnauthorizedResourceException } from '@/shared/domain/exception/unauthorized-resource.exception';
+import { DomainException } from '@/domain/exception/domain.exception';
+import { EntityAlreadyExistsException } from '@/domain/exception/entity-already-exists.exception';
+import { EntityNotFoundException } from '@/domain/exception/entity-not-found.exception';
+import { UnauthorizedResourceException } from '@/domain/exception/unauthorized-resource.exception';
 import {
   ArgumentsHost,
   Catch,

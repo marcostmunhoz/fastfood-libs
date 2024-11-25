@@ -1,4 +1,4 @@
-import { EntityIdValueObject } from '@/shared/domain/value-object/entity-id.value-object';
+import { EntityIdValueObject } from '@/domain/value-object/entity-id.value-object';
 import { Transform } from 'class-transformer';
 
 type TransformOptionalCallback = (value: any) => any | null;

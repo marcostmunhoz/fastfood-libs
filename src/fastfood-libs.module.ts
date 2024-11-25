@@ -17,4 +17,4 @@ const guards = [AuthGuard];
   providers: [...helpers, ...guards],
   exports: [EntityIdGeneratorHelperToken, JwtHelper, AuthGuard],
 })
-export class SharedModule {}
+export class FastfoodLibsModule {}

@@ -1,4 +1,4 @@
-import { UserData } from '@/shared/domain/data/user.data';
+import { UserData } from '@/domain/data/user.data';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const AuthUser = createParamDecorator(
