@@ -1,5 +1,5 @@
 import { ArgumentMetadata, Optional, PipeTransform } from '@nestjs/common';
-import { ClassTransformOptions, plainToClass } from 'class-transformer';
+import { ClassTransformOptions, plainToInstance } from 'class-transformer';
 
 export type TransformationOptions = ClassTransformOptions;
 
@@ -29,7 +29,7 @@ export class TransformationPipe implements PipeTransform<any> {
     }
 
     // @ts-expect-error prevent errors from mismatch overload
-    return plainToClass(metatype, value, this.transformationOptions);
+    return plainToInstance(metatype, value, this.transformationOptions);
   }
 
   protected getDefaultTransformationOptions(): TransformationOptions {

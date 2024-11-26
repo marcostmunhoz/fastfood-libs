@@ -1,3 +1,4 @@
+import { EntityIdGeneratorHelper } from 'src/domain';
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm';
 
 type RepositoryWithQueryBuilderResult<T extends ObjectLiteral> = {
@@ -32,3 +33,8 @@ export const getTypeOrmRepositoryMock = <
 
   return { repositoryMock, queryBuilderMock };
 };
+
+export const getEntityIdGeneratorHelperMock =
+  (): jest.Mocked<EntityIdGeneratorHelper> => ({
+    generate: jest.fn(),
+  });
