@@ -1,4 +1,4 @@
 export type UserData = {
-  readonly id: string;
-  readonly name: string | null;
+  id: string;
+  name: string | null;
 };
