@@ -7,7 +7,7 @@ import {
   ProductData,
   ProductDescriptionValueObject,
   ProductNameValueObject,
-} from '@/domain';
+} from '../domain';
 
 export const getValidProductEntityId = (): EntityIdValueObject =>
   EntityIdValueObject.create('product-id');

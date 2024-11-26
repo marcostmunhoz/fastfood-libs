@@ -1,5 +1,5 @@
-import { UserData } from '@/domain/data/user.data';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { UserData } from '../../domain';
 
 export const AuthUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext): Readonly<UserData> => {

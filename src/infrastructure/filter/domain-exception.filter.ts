@@ -1,13 +1,15 @@
-import { DomainException } from '@/domain/exception/domain.exception';
-import { EntityAlreadyExistsException } from '@/domain/exception/entity-already-exists.exception';
-import { EntityNotFoundException } from '@/domain/exception/entity-not-found.exception';
-import { UnauthorizedResourceException } from '@/domain/exception/unauthorized-resource.exception';
 import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
   HttpStatus,
 } from '@nestjs/common';
+import {
+  DomainException,
+  EntityAlreadyExistsException,
+  EntityNotFoundException,
+  UnauthorizedResourceException,
+} from '../../domain';
 
 type ResponseBody = {
   statusCode: number;

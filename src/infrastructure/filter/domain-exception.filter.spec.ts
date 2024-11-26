@@ -1,4 +1,4 @@
-import { DomainException } from '@/domain/exception/domain.exception';
+import { DomainException } from '../../domain';
 import { DomainExceptionFilter } from './domain-exception.filter';
 
 describe('DomainExceptionFilter', () => {

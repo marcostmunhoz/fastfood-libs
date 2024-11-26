@@ -1,7 +1,7 @@
-import { UserData } from '@/domain/data/user.data';
 import { ExecutionContext } from '@nestjs/common';
 import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
 import 'reflect-metadata';
+import { UserData } from '../../domain';
 import { AuthUser } from './auth-user.decorator';
 
 const getParamDecoratorFactory = (decorator: (...args: any[]) => any) => {

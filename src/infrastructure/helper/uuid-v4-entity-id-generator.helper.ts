@@ -1,6 +1,5 @@
-import { EntityIdGeneratorHelper } from '@/domain/helper/entity-id-generator.helper.interface';
-import { EntityIdValueObject } from '@/domain/value-object/entity-id.value-object';
 import { v4 } from 'uuid';
+import { EntityIdGeneratorHelper, EntityIdValueObject } from '../../domain';
 
 export class UuidV4EntityIdGeneratorHelper implements EntityIdGeneratorHelper {
   generate(): EntityIdValueObject {

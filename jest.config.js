@@ -2,7 +2,6 @@
 export default {
   moduleFileExtensions: ['js', 'ts', 'json'],
   rootDir: 'src',
-  moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },
   transform: { '^.+\\.ts$': 'ts-jest' },
   collectCoverageFrom: ['**/*.ts'],
   coverageDirectory: '../coverage',

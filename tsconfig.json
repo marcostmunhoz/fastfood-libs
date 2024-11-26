@@ -12,10 +12,7 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false,
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "strictPropertyInitialization": false
   },
   "exclude": ["node_modules", "lib", "jest.config.js"]
 }
