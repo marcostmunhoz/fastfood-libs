@@ -45,10 +45,6 @@ export class MoneyValueObject extends AbstractValueObject<MoneyValueObjectProps>
       return false;
     }
 
-    if (value === null || value === undefined || isNaN(value)) {
-      return false;
-    }
-
     if (value < 0) {
       return false;
     }

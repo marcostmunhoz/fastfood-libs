@@ -13,6 +13,17 @@ class ConcreteValueObject extends AbstractValueObject<ConcreteValueObjectProps> 
 
 describe('AbstractValueObject', () => {
   describe('equals', () => {
+    it('should return false when comparing a value object with undefined', () => {
+      // Arrange
+      const valueObject = new ConcreteValueObject({ id: 1, name: 'John' });
+
+      // Act
+      const result = valueObject.equals(undefined);
+
+      // Assert
+      expect(result).toBe(false);
+    });
+
     it('should return true when comparing two value objects with the same props', () => {
       // Arrange
       const props = { id: 1, name: 'John' };

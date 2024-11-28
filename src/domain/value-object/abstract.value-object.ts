@@ -13,11 +13,7 @@ export abstract class AbstractValueObject<T extends ValueObjectProps> {
   }
 
   public equals(vo?: AbstractValueObject<T>): boolean {
-    if (vo === null || vo === undefined) {
-      return false;
-    }
-
-    if (vo.props === undefined) {
+    if (vo === undefined || vo.props === undefined) {
       return false;
     }
 

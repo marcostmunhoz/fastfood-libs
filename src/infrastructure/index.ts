@@ -1,3 +1,6 @@
+export * from './config/app.config';
+export * from './config/config.validator';
+export * from './config/database.config';
 export * from './decorator/auth-user.decorator';
 export * from './decorator/class-transformer-helpers.decorator';
 export * from './decorator/swagger-property.decorator';

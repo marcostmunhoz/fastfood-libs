@@ -1,6 +1,50 @@
 import { MoneyValueObject } from './money.value-object';
 
 describe('MoneyValueObject', () => {
+  describe('valueAsFloat', () => {
+    it('should return the value as a float', () => {
+      // Arrange
+      const value = 12345;
+
+      // Act
+      const instance = MoneyValueObject.create(value);
+
+      // Assert
+      expect(instance.valueAsFloat).toBe(123.45);
+    });
+  });
+
+  describe('sum', () => {
+    it('should sum two MoneyValueObjects', () => {
+      // Arrange
+      const value1 = 100;
+      const value2 = 200;
+
+      // Act
+      const instance1 = MoneyValueObject.create(value1);
+      const instance2 = MoneyValueObject.create(value2);
+      const result = instance1.sum(instance2);
+
+      // Assert
+      expect(result.value).toBe(300);
+    });
+  });
+
+  describe('multiply', () => {
+    it('should multiply a MoneyValueObject by a number', () => {
+      // Arrange
+      const value = 100;
+      const multiplier = 2;
+
+      // Act
+      const instance = MoneyValueObject.create(value);
+      const result = instance.multiply(multiplier);
+
+      // Assert
+      expect(result.value).toBe(200);
+    });
+  });
+
   describe('create', () => {
     it('should create a MoneyValueObject from a valid value', () => {
       // Arrange
@@ -79,6 +123,16 @@ describe('MoneyValueObject', () => {
 
       // Act & Assert
       expect(create).toThrow('Invalid money value.');
+    });
+  });
+
+  describe('zero', () => {
+    it('should create a MoneyValueObject with a value of 0', () => {
+      // Act
+      const instance = MoneyValueObject.zero();
+
+      // Assert
+      expect(instance.value).toBe(0);
     });
   });
 });

@@ -20,10 +20,6 @@ export class ProductCodeValueObject extends AbstractValueObject<ProductCodeValue
   }
 
   private static isValid(value: string): boolean {
-    if (value === null || value === undefined) {
-      return false;
-    }
-
     if (value.length < 2 || value.length > 20) {
       return false;
     }

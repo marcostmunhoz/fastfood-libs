@@ -35,12 +35,23 @@ describe('ProductCodeValueObject', () => {
       expect(create).toThrow('Invalid product code.');
     });
 
-    it('should throw an error when the code is more than 100 characters', () => {
+    it('should throw an error when the code is more than 20 characters', () => {
       // Arrange
       const longCode = 'A'.repeat(21);
 
       // Act
       const create = () => ProductCodeValueObject.create(longCode);
+
+      // Act & Assert
+      expect(create).toThrow('Invalid product code.');
+    });
+
+    it('should throw an error when the code contains a space', () => {
+      // Arrange
+      const codeWithSpace = 'CODE 123';
+
+      // Act
+      const create = () => ProductCodeValueObject.create(codeWithSpace);
 
       // Act & Assert
       expect(create).toThrow('Invalid product code.');

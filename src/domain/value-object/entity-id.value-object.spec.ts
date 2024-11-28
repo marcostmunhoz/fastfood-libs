@@ -23,5 +23,16 @@ describe('EntityIdValueObject', () => {
       // Act & Assert
       expect(create).toThrow('Invalid ID.');
     });
+
+    it('should throw an error when the the sanitized id is empty', () => {
+      // Arrange
+      const emptyAfterSanitizationId = '     ';
+
+      // Act
+      const create = () => EntityIdValueObject.create(emptyAfterSanitizationId);
+
+      // Act & Assert
+      expect(create).toThrow('Invalid ID.');
+    });
   });
 });

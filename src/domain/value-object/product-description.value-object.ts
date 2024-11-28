@@ -18,10 +18,6 @@ export class ProductDescriptionValueObject extends AbstractValueObject<ProductDe
   }
 
   private static isValid(value: string): boolean {
-    if (value === null || value === undefined) {
-      return false;
-    }
-
     if (value.length < 2 || value.length > 255) {
       return false;
     }

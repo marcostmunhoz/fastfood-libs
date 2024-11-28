@@ -1,14 +1,20 @@
-import { DomainException } from '../../domain';
+import { HttpStatus } from '@nestjs/common';
+import {
+  DomainException,
+  EntityAlreadyExistsException,
+  EntityNotFoundException,
+  UnauthorizedResourceException,
+} from '../../domain';
 import { DomainExceptionFilter } from './domain-exception.filter';
 
 describe('DomainExceptionFilter', () => {
-  describe('catch', () => {
-    it('should catch the exception and return a response with status 400 and the exception message', () => {
+  describe.each([
+    [new EntityNotFoundException('Some message'), HttpStatus.NOT_FOUND],
+    [new EntityAlreadyExistsException('Some message'), HttpStatus.CONFLICT],
+    [new UnauthorizedResourceException(), HttpStatus.FORBIDDEN],
+  ])('catch', (exception: DomainException, status: number) => {
+    it(`should catch the ${exception.name} and return a response with status ${status} and the exception message`, () => {
       const filter = new DomainExceptionFilter();
-      const mockException: DomainException = {
-        name: 'DomainException',
-        message: 'mock message',
-      };
       const mockHost = {
         switchToHttp: jest.fn().mockReturnValue({
           getResponse: jest.fn().mockReturnValue({
@@ -19,7 +25,7 @@ describe('DomainExceptionFilter', () => {
         }),
       };
 
-      filter.catch(mockException, mockHost as any);
+      filter.catch(exception, mockHost as any);
 
       expect(mockHost.switchToHttp).toHaveBeenCalledTimes(1);
       expect(mockHost.switchToHttp().getResponse).toHaveBeenCalledTimes(1);
@@ -27,7 +33,7 @@ describe('DomainExceptionFilter', () => {
         mockHost.switchToHttp().getResponse().status,
       ).toHaveBeenCalledTimes(1);
       expect(mockHost.switchToHttp().getResponse().status).toHaveBeenCalledWith(
-        400,
+        status,
       );
       expect(
         mockHost.switchToHttp().getResponse().status().json,
@@ -35,8 +41,8 @@ describe('DomainExceptionFilter', () => {
       expect(
         mockHost.switchToHttp().getResponse().status().json,
       ).toHaveBeenCalledWith({
-        statusCode: 400,
-        message: 'mock message',
+        statusCode: status,
+        message: exception.message,
       });
     });
   });
