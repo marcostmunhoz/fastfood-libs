@@ -9,8 +9,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import {
   FastfoodLibsModuleAsyncOptions,
+  FastfoodLibsModuleOptions,
   FastfoodLibsModuleOptionsToken,
-} from './fastfood-libs-options.interface';
+} from './fastfood-libs-options.type';
 import {
   APP_CONFIG_PROPS,
   AppConfig,
@@ -51,6 +52,7 @@ const moduleProviders: Provider[] = [
     useFactory: (
       appConfig: AppConfig,
       databaseConfig: DatabaseConfig,
+      moduleOptions: FastfoodLibsModuleOptions,
     ): TypeOrmModuleOptions => {
       const database =
         appConfig.NODE_ENV === Environment.Test
@@ -59,7 +61,7 @@ const moduleProviders: Provider[] = [
       const synchronize = appConfig.NODE_ENV === Environment.Test;
 
       return {
-        type: 'mysql',
+        type: moduleOptions.database.type,
         host: databaseConfig.MYSQL_DATABASE_HOST,
         port: databaseConfig.MYSQL_DATABASE_PORT,
         username: databaseConfig.MYSQL_DATABASE_USERNAME,
@@ -67,9 +69,17 @@ const moduleProviders: Provider[] = [
         database,
         synchronize,
         logging: databaseConfig.MYSQL_DATABASE_LOGGING === 'true',
+        migrations: moduleOptions.database.migrations,
+        migrationsTransactionMode:
+          moduleOptions.database.migrationsTransactionMode || 'none',
+        migrationsRun: moduleOptions.database.runMigrationsOnStartup || false,
       };
     },
-    inject: [APP_CONFIG_PROPS.KEY, DATABASE_CONFIG_PROPS.KEY],
+    inject: [
+      APP_CONFIG_PROPS.KEY,
+      DATABASE_CONFIG_PROPS.KEY,
+      FastfoodLibsModuleOptionsToken,
+    ],
   },
 ];
 const moduleExports: InjectionToken[] = [
