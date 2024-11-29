@@ -1,4 +1,10 @@
-import { EntityIdGeneratorHelper } from 'src/domain';
+import {
+  CanActivate,
+  ExecutionContext,
+  INestApplication,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { EntityIdGeneratorHelper, UserData } from 'src/domain';
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm';
 
 type RepositoryWithQueryBuilderResult<T extends ObjectLiteral> = {
@@ -38,3 +44,32 @@ export const getEntityIdGeneratorHelperMock =
   (): jest.Mocked<EntityIdGeneratorHelper> => ({
     generate: jest.fn(),
   });
+
+export const mockUser: UserData = {
+  id: 'mock-id',
+  name: 'John Doe',
+};
+
+export class MockGuard implements CanActivate {
+  canActivate(context: ExecutionContext): boolean {
+    const request = context.switchToHttp().getRequest();
+
+    request.user = mockUser;
+
+    return true;
+  }
+}
+
+export const createMockGuard = () => {
+  return new MockGuard();
+};
+
+export const getAuthToken = (
+  app: INestApplication,
+  user: UserData = mockUser,
+) => {
+  return app.get(JwtService).sign({
+    sub: user.id,
+    name: user.name,
+  });
+};
