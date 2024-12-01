@@ -1,6 +1,3 @@
-import { OrderData, PartialOrderData } from 'src/domain/data/order.data';
-import { OrderStatusEnum } from 'src/domain/enum/order-status.enum';
-import { OrderItemValueObject } from 'src/domain/value-object/order-item.value-object';
 import {
   EntityIdValueObject,
   ItemQuantityValueObject,
@@ -12,6 +9,9 @@ import {
   ProductDescriptionValueObject,
   ProductNameValueObject,
 } from '../domain';
+import { OrderData, PartialOrderData } from '../domain/data/order.data';
+import { OrderStatusEnum } from '../domain/enum/order-status.enum';
+import { OrderItemValueObject } from '../domain/value-object/order-item.value-object';
 
 export const getValidProductEntityId = (): EntityIdValueObject =>
   EntityIdValueObject.create('product-id');

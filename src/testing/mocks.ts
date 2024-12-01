@@ -4,8 +4,8 @@ import {
   INestApplication,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { EntityIdGeneratorHelper, UserData } from 'src/domain';
 import { ObjectLiteral, Repository, SelectQueryBuilder } from 'typeorm';
+import { EntityIdGeneratorHelper, UserData } from '../domain';
 
 type RepositoryWithQueryBuilderResult<T extends ObjectLiteral> = {
   repositoryMock: jest.Mocked<Repository<T>>;
