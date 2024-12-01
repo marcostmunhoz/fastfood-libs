@@ -13,3 +13,4 @@ export * from './helper/response.helper';
 export * from './helper/uuid-v4-entity-id-generator.helper';
 export * from './pipe/transformation.pipe';
 export * from './pipe/validation.pipe';
+export * from './services/http-client.service';

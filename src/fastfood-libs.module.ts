@@ -1,3 +1,4 @@
+import { HttpModule } from '@nestjs/axios';
 import {
   DynamicModule,
   InjectionToken,
@@ -23,12 +24,16 @@ import {
 } from './infrastructure/config/database.config';
 import { JwtHelper } from './infrastructure/helper/jwt.helper';
 import { UuidV4EntityIdGeneratorHelper } from './infrastructure/helper/uuid-v4-entity-id-generator.helper';
+import { HttpClientService } from './infrastructure/services/http-client.service';
 import {
   EntityIdGeneratorHelperToken,
   TypeOrmModuleOptionsToken,
 } from './tokens';
 
 const moduleImports: (DynamicModule | Promise<DynamicModule>)[] = [
+  HttpModule.register({
+    global: true,
+  }),
   ConfigModule.forRoot({
     isGlobal: true,
     load: [APP_CONFIG_PROPS, DATABASE_CONFIG_PROPS],
@@ -43,6 +48,7 @@ const moduleImports: (DynamicModule | Promise<DynamicModule>)[] = [
 ];
 const moduleProviders: Provider[] = [
   JwtHelper,
+  HttpClientService,
   {
     provide: EntityIdGeneratorHelperToken,
     useClass: UuidV4EntityIdGeneratorHelper,
@@ -84,6 +90,7 @@ const moduleProviders: Provider[] = [
 ];
 const moduleExports: InjectionToken[] = [
   JwtHelper,
+  HttpClientService,
   EntityIdGeneratorHelperToken,
   TypeOrmModuleOptionsToken,
   FastfoodLibsModuleOptionsToken,
