@@ -8,6 +8,8 @@ import {
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
+import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
 import {
   FastfoodLibsModuleAsyncOptions,
   FastfoodLibsModuleOptions,
@@ -66,6 +68,19 @@ const moduleProviders: Provider[] = [
           : databaseConfig.MYSQL_DATABASE_NAME;
       const synchronize = appConfig.NODE_ENV === Environment.Test;
 
+      if ('sqlite' === moduleOptions.database.type) {
+        return {
+          type: moduleOptions.database.type,
+          database,
+          synchronize,
+          logging: databaseConfig.MYSQL_DATABASE_LOGGING === 'true',
+          migrations: moduleOptions.database.migrations,
+          migrationsTransactionMode:
+            moduleOptions.database.migrationsTransactionMode || 'none',
+          migrationsRun: moduleOptions.database.runMigrationsOnStartup,
+        } as SqliteConnectionOptions;
+      }
+
       return {
         type: moduleOptions.database.type,
         host: databaseConfig.MYSQL_DATABASE_HOST,
@@ -79,7 +94,7 @@ const moduleProviders: Provider[] = [
         migrationsTransactionMode:
           moduleOptions.database.migrationsTransactionMode || 'none',
         migrationsRun: moduleOptions.database.runMigrationsOnStartup || false,
-      };
+      } as MysqlConnectionOptions;
     },
     inject: [
       APP_CONFIG_PROPS.KEY,

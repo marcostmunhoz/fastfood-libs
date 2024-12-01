@@ -2,7 +2,7 @@ import { InjectionToken, ModuleMetadata } from '@nestjs/common';
 import { MixedList } from 'typeorm';
 import { BaseDataSourceOptions } from 'typeorm/data-source/BaseDataSourceOptions';
 
-export type SupportedDatabaseTypes = 'mysql';
+export type SupportedDatabaseTypes = 'mysql' | 'sqlite';
 
 export type FastfoodLibsModuleOptions = {
   database: {
