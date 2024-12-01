@@ -71,7 +71,7 @@ const moduleProviders: Provider[] = [
       if ('sqlite' === moduleOptions.database.type) {
         return {
           type: moduleOptions.database.type,
-          database,
+          database: ':memory:',
           synchronize,
           logging: databaseConfig.MYSQL_DATABASE_LOGGING === 'true',
           migrations: moduleOptions.database.migrations,
