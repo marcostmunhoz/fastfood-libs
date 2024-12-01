@@ -1,13 +1,12 @@
-import { HttpService } from '@nestjs/axios';
-import { AxiosInstance, AxiosResponse, Method } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, Method } from 'axios';
 
 export type HttpClientResponse<T> = AxiosResponse<T>;
 
 export class HttpClientService {
   private readonly axios: AxiosInstance;
 
-  constructor(httpService: HttpService) {
-    this.axios = httpService.axiosRef;
+  constructor() {
+    this.axios = axios.create();
   }
 
   async request<T>(

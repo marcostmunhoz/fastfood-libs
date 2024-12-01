@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios';
 import {
   DynamicModule,
   InjectionToken,
@@ -33,9 +32,6 @@ import {
 } from './tokens';
 
 const moduleImports: (DynamicModule | Promise<DynamicModule>)[] = [
-  HttpModule.register({
-    global: true,
-  }),
   ConfigModule.forRoot({
     isGlobal: true,
     load: [APP_CONFIG_PROPS, DATABASE_CONFIG_PROPS],

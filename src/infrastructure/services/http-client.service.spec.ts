@@ -1,20 +1,17 @@
-import { HttpService } from '@nestjs/axios';
-import { AxiosInstance, Method } from 'axios';
+import axios, { AxiosInstance, Method } from 'axios';
 import { HttpClientResponse, HttpClientService } from './http-client.service';
+jest.mock('axios');
 
 describe('HttpClientService', () => {
   let axiosMock: jest.Mocked<AxiosInstance>;
-  let httpService: HttpService;
   let sut: HttpClientService;
 
   beforeEach(() => {
     axiosMock = {
       request: jest.fn(),
     } as any;
-    httpService = {
-      axiosRef: axiosMock,
-    } as any;
-    sut = new HttpClientService(httpService);
+    (axios.create as jest.Mock).mockReturnValue(axiosMock);
+    sut = new HttpClientService();
   });
 
   test('request should return a promise that resolves into a complete HttpResponse object', async () => {
