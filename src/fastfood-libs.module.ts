@@ -22,6 +22,7 @@ import {
 import {
   DATABASE_CONFIG_PROPS,
   DatabaseConfig,
+  SupportedDatabaseTypes,
 } from './infrastructure/config/database.config';
 import { JwtHelper } from './infrastructure/helper/jwt.helper';
 import { UuidV4EntityIdGeneratorHelper } from './infrastructure/helper/uuid-v4-entity-id-generator.helper';
@@ -58,18 +59,17 @@ const moduleProviders: Provider[] = [
       databaseConfig: DatabaseConfig,
       moduleOptions: FastfoodLibsModuleOptions,
     ): TypeOrmModuleOptions => {
-      const database =
-        appConfig.NODE_ENV === Environment.Test
-          ? databaseConfig.MYSQL_DATABASE_TESTING_NAME
-          : databaseConfig.MYSQL_DATABASE_NAME;
-      const synchronize = appConfig.NODE_ENV === Environment.Test;
+      const synchronize =
+        databaseConfig.DATABASE_SYNCHRONIZE === 'true'
+          ? true
+          : appConfig.NODE_ENV === Environment.Test;
 
-      if ('sqlite' === moduleOptions.database.type) {
+      if (SupportedDatabaseTypes.SQLITE === databaseConfig.DATABASE_TYPE) {
         return {
-          type: moduleOptions.database.type,
+          type: databaseConfig.DATABASE_TYPE,
           database: ':memory:',
           synchronize,
-          logging: databaseConfig.MYSQL_DATABASE_LOGGING === 'true',
+          logging: databaseConfig.DATABASE_LOGGING === 'true',
           migrations: moduleOptions.database.migrations,
           migrationsTransactionMode:
             moduleOptions.database.migrationsTransactionMode || 'none',
@@ -78,14 +78,17 @@ const moduleProviders: Provider[] = [
       }
 
       return {
-        type: moduleOptions.database.type,
+        type: databaseConfig.DATABASE_TYPE,
         host: databaseConfig.MYSQL_DATABASE_HOST,
         port: databaseConfig.MYSQL_DATABASE_PORT,
         username: databaseConfig.MYSQL_DATABASE_USERNAME,
         password: databaseConfig.MYSQL_DATABASE_PASSWORD,
-        database,
+        database:
+          appConfig.NODE_ENV === Environment.Test
+            ? databaseConfig.MYSQL_DATABASE_TESTING_NAME
+            : databaseConfig.MYSQL_DATABASE_NAME,
         synchronize,
-        logging: databaseConfig.MYSQL_DATABASE_LOGGING === 'true',
+        logging: databaseConfig.DATABASE_LOGGING === 'true',
         migrations: moduleOptions.database.migrations,
         migrationsTransactionMode:
           moduleOptions.database.migrationsTransactionMode || 'none',

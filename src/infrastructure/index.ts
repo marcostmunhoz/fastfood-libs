@@ -6,7 +6,7 @@ export * from './decorator/class-transformer-helpers.decorator';
 export * from './decorator/swagger-property.decorator';
 export * from './decorator/swagger-response.decorator';
 export * from './entity/base.entity';
-export * from './filter/domain-exception.filter';
+export * from './filter/global-exception.filter';
 export * from './guard/auth.guard';
 export * from './helper/jwt.helper';
 export * from './helper/response.helper';

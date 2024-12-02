@@ -1,18 +1,13 @@
-import { Column, PrimaryColumn } from 'typeorm';
+import { PrimaryColumn } from 'typeorm';
+import { TimestampColumn } from '../decorator/typeorm.decorator';
 
 export abstract class BaseEntity {
   @PrimaryColumn()
   id: string;
 
-  @Column({
-    name: 'created_at',
-    type: 'timestamp',
-  })
+  @TimestampColumn('created_at')
   createdAt: Date;
 
-  @Column({
-    name: 'updated_at',
-    type: 'timestamp',
-  })
+  @TimestampColumn('updated_at')
   updatedAt: Date;
 }

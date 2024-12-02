@@ -1,13 +1,28 @@
 import { registerAs } from '@nestjs/config';
 import {
   IsBooleanString,
+  IsEnum,
   IsNumber,
   IsPositive,
   IsString,
 } from 'class-validator';
 import { validateConfig } from './config.validator';
 
+export enum SupportedDatabaseTypes {
+  MYSQL = 'mysql',
+  SQLITE = 'sqlite',
+}
+
 export class DatabaseConfig {
+  @IsEnum(SupportedDatabaseTypes)
+  DATABASE_TYPE: string;
+
+  @IsBooleanString()
+  DATABASE_LOGGING: string;
+
+  @IsBooleanString()
+  DATABASE_SYNCHRONIZE: string;
+
   @IsString()
   MYSQL_DATABASE_HOST: string;
 
@@ -26,13 +41,13 @@ export class DatabaseConfig {
 
   @IsString()
   MYSQL_DATABASE_TESTING_NAME: string;
-
-  @IsBooleanString()
-  MYSQL_DATABASE_LOGGING: string;
 }
 
 export const DATABASE_CONFIG_PROPS = registerAs('database', () => {
   const props = {
+    DATABASE_TYPE: process.env.DATABASE_TYPE || SupportedDatabaseTypes.MYSQL,
+    DATABASE_LOGGING: process.env.DATABASE_LOGGING || 'false',
+    DATABASE_SYNCHRONIZE: process.env.DATABASE_SYNCHRONIZE || 'false',
     MYSQL_DATABASE_HOST: process.env.MYSQL_DATABASE_HOST,
     MYSQL_DATABASE_PORT: parseInt(
       process.env.MYSQL_DATABASE_PORT || '3306',
@@ -43,7 +58,6 @@ export const DATABASE_CONFIG_PROPS = registerAs('database', () => {
     MYSQL_DATABASE_NAME: process.env.MYSQL_DATABASE_NAME,
     MYSQL_DATABASE_TESTING_NAME:
       process.env.MYSQL_DATABASE_TESTING_NAME || 'test',
-    MYSQL_DATABASE_LOGGING: process.env.MYSQL_DATABASE_LOGGING || 'false',
   };
 
   return validateConfig(DatabaseConfig, props);
