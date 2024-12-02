@@ -10,7 +10,10 @@ import {
   ProductNameValueObject,
 } from '../domain';
 import { OrderData, PartialOrderData } from '../domain/data/order.data';
+import { PartialPaymentData, PaymentData } from '../domain/data/payment.data';
 import { OrderStatusEnum } from '../domain/enum/order-status.enum';
+import { PaymentMethodEnum } from '../domain/enum/payment-method.enum';
+import { PaymentStatusEnum } from '../domain/enum/payment-status.enum';
 import { OrderItemValueObject } from '../domain/value-object/order-item.value-object';
 
 export const getValidProductEntityId = (): EntityIdValueObject =>
@@ -49,6 +52,23 @@ export const getValidOrderItem = (): OrderItemValueObject =>
 export const getValidOrderTotal = (): MoneyValueObject =>
   MoneyValueObject.create(1000);
 
+export const getValidPaymentEntityId = (): EntityIdValueObject =>
+  EntityIdValueObject.create('payment-id');
+
+export const getValidPaymentOrderId = (): EntityIdValueObject =>
+  EntityIdValueObject.create('order-id');
+
+export const getValidPaymentTotal = (): MoneyValueObject =>
+  MoneyValueObject.create(1000);
+
+export const getValidPaymentMethod = (): PaymentMethodEnum =>
+  PaymentMethodEnum.CREDIT_CARD;
+
+export const getValidPaymentStatus = (): PaymentStatusEnum =>
+  PaymentStatusEnum.PENDING;
+
+export const getValidPaymentExternalId = (): string => 'external-id';
+
 export const getPartialProductData = (): PartialProductData => ({
   code: getValidProductCode(),
   name: getValidProductName(),
@@ -77,4 +97,19 @@ export const getCompleteOrderData = (): OrderData => ({
   createdAt: new Date(),
   updatedAt: new Date(),
   ...getPartialOrderData(),
+});
+
+export const getPartialPaymentData = (): PartialPaymentData => ({
+  orderId: getValidPaymentOrderId().value,
+  total: getValidPaymentTotal(),
+  paymentMethod: getValidPaymentMethod(),
+  status: getValidPaymentStatus(),
+  externalPaymentId: getValidPaymentExternalId(),
+});
+
+export const getCompletePaymentData = (): PaymentData => ({
+  id: getValidPaymentEntityId(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  ...getPartialPaymentData(),
 });

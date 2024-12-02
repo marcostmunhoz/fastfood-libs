@@ -7,6 +7,7 @@ import {
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions';
 import {
@@ -77,16 +78,31 @@ const moduleProviders: Provider[] = [
         } as SqliteConnectionOptions;
       }
 
+      if (SupportedDatabaseTypes.MONGODB === databaseConfig.DATABASE_TYPE) {
+        return {
+          type: databaseConfig.DATABASE_TYPE,
+          host: databaseConfig.DATABASE_HOST,
+          port: databaseConfig.DATABASE_PORT,
+          username: databaseConfig.DATABASE_USERNAME,
+          password: databaseConfig.DATABASE_PASSWORD,
+          database:
+            appConfig.NODE_ENV === Environment.Test
+              ? databaseConfig.DATABASE_TESTING_NAME
+              : databaseConfig.DATABASE_NAME,
+          logging: databaseConfig.DATABASE_LOGGING === 'true',
+        } as MongoConnectionOptions;
+      }
+
       return {
         type: databaseConfig.DATABASE_TYPE,
-        host: databaseConfig.MYSQL_DATABASE_HOST,
-        port: databaseConfig.MYSQL_DATABASE_PORT,
-        username: databaseConfig.MYSQL_DATABASE_USERNAME,
-        password: databaseConfig.MYSQL_DATABASE_PASSWORD,
+        host: databaseConfig.DATABASE_HOST,
+        port: databaseConfig.DATABASE_PORT,
+        username: databaseConfig.DATABASE_USERNAME,
+        password: databaseConfig.DATABASE_PASSWORD,
         database:
           appConfig.NODE_ENV === Environment.Test
-            ? databaseConfig.MYSQL_DATABASE_TESTING_NAME
-            : databaseConfig.MYSQL_DATABASE_NAME,
+            ? databaseConfig.DATABASE_TESTING_NAME
+            : databaseConfig.DATABASE_NAME,
         synchronize,
         logging: databaseConfig.DATABASE_LOGGING === 'true',
         migrations: moduleOptions.database.migrations,
