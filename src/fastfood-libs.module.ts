@@ -79,16 +79,14 @@ const moduleProviders: Provider[] = [
       }
 
       if (SupportedDatabaseTypes.MONGODB === databaseConfig.DATABASE_TYPE) {
+        const database =
+          appConfig.NODE_ENV === Environment.Test
+            ? databaseConfig.DATABASE_TESTING_NAME
+            : databaseConfig.DATABASE_NAME;
+
         return {
           type: databaseConfig.DATABASE_TYPE,
-          host: databaseConfig.DATABASE_HOST,
-          port: databaseConfig.DATABASE_PORT,
-          username: databaseConfig.DATABASE_USERNAME,
-          password: databaseConfig.DATABASE_PASSWORD,
-          database:
-            appConfig.NODE_ENV === Environment.Test
-              ? databaseConfig.DATABASE_TESTING_NAME
-              : databaseConfig.DATABASE_NAME,
+          url: `mongodb://${databaseConfig.DATABASE_USERNAME}:${databaseConfig.DATABASE_PASSWORD}@${databaseConfig.DATABASE_HOST}:${databaseConfig.DATABASE_PORT}/${database}`,
           logging: databaseConfig.DATABASE_LOGGING === 'true',
         } as MongoConnectionOptions;
       }
